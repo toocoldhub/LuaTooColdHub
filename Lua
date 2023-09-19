@@ -1677,7 +1677,32 @@ local section6 = t4:NewSection("etc")
 -- For Example:
 
 -- Your first toggle in section 1
-section1:NewToggle("Toggle in section 1", false, function(bool)
+section1:NewToggle("Mags", false, function(bool)
+local player = game.Players.LocalPlayer
+local rs = game:GetService("RunService")
+
+local function magBall(ball)
+  if ball and player.Character then
+    ball.TouchInterest = 1
+    firetouchinterest(player.Character["Left Arm"], ball, 0)
+    firetouchinterest(player.Character["Right Arm"], ball, 0)
+
+    task.wait()
+
+    local startPos = ball.Position
+    local endPos = player.Character.HumanoidRootPart.Position
+
+    local direction = (endPos - startPos).Unit
+    local force = 10000
+
+    ball.CFrame = ball.CFrame + direction * force
+
+    firetouchinterest(player.Character["Left Arm"], ball, 1)
+    firetouchinterest(player.Character["Right Arm"], ball, 1)
+  end
+end
+
+workspace.Ball.Touched:Connect(magBall)
 end)
 
 
