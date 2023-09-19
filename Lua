@@ -1,5 +1,5 @@
 
-wlocal Library = {};
+local Library = {};
 
 local plr = game:GetService('Players').LocalPlayer
 local mouse = plr:GetMouse()
